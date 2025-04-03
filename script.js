@@ -62,3 +62,21 @@ function getDealsByZip(zip) {
   };
   return dealMap[zip] || dealMap["default"];
 }
+
+// Try to detect user's ZIP code using geolocation
+window.addEventListener("load", function () {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(async function (position) {
+      const { latitude, longitude } = position.coords;
+      try {
+        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+        const data = await res.json();
+        if (data.postcode) {
+          document.getElementById("zipInput").value = data.postcode;
+        }
+      } catch (err) {
+        console.error("Geolocation error:", err);
+      }
+    });
+  }
+});

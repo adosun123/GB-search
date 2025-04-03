@@ -7,14 +7,23 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1 class="brand">GuestBites</h1>
+    <p class="tagline">Local food deals for short-term rental guests 🍽️</p>
+  </header>
+
   <div class="container">
-    <h1>Find Local Food Deals 🍽️</h1>
     <form id="zipForm">
       <input type="text" id="zipInput" placeholder="Enter ZIP Code" required />
       <button type="submit">Show Deals</button>
     </form>
     <div id="deals"></div>
   </div>
+
+  <footer>
+    <p>Contact us at <a href="mailto:hello@guestbites.com">hello@guestbites.com</a></p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
