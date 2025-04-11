@@ -11,7 +11,7 @@
       width: 64px;
       height: 64px;
       margin: 2rem auto 1rem;
-      display: block;
+      display: none; /* Hidden by default */
     }
 
     @keyframes spin {
@@ -28,7 +28,7 @@
 
   <div class="container">
     <!-- Spinning Icon -->
-    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046791.png" alt="Fork and Knife Icon" class="spinning-icon">
+    <img id="loadingSpinner" src="https://cdn-icons-png.flaticon.com/512/1046/1046791.png" alt="Fork and Knife Icon" class="spinning-icon">
 
     <form id="zipForm">
       <input type="text" id="zipInput" placeholder="Enter ZIP Code" required />
@@ -42,14 +42,22 @@
   </footer>
 
   <script>
-    // Prevent form from submitting and showing 404 during testing
     document.getElementById('zipForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const zip = document.getElementById('zipInput').value;
-      alert('You entered ZIP code: ' + zip);
+
+      // Show spinner
+      document.getElementById('loadingSpinner').style.display = 'block';
+
+      // Fake a loading delay for demo purposes
+      setTimeout(() => {
+        alert('You entered ZIP code: ' + zip);
+        document.getElementById('loadingSpinner').style.display = 'none';
+      }, 2000);
     });
   </script>
 </body>
 </html>
+
 
 
