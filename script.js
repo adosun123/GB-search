@@ -1,22 +1,34 @@
-
 document.getElementById("zipForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const zip = document.getElementById("zipInput").value.trim();
-  const deals = getDealsByZip(zip);
   const container = document.getElementById("deals");
+
+  // Show spinner
+  const spinner = document.getElementById("loadingSpinner");
+  spinner.style.display = "block";
+
+  // Clear previous content
   container.innerHTML = "";
 
-  if (!deals || deals.length === 0) {
-    container.innerHTML = "<p>No deals found for that ZIP code.</p>";
-    return;
-  }
+  // Simulate loading delay for better visual experience
+  setTimeout(() => {
+    const deals = getDealsByZip(zip);
 
-  deals.forEach(deal => {
-    const div = document.createElement("div");
-    div.className = "deal";
-    div.innerHTML = `<a href="${deal.url}" target="_blank">${deal.title}</a>`;
-    container.appendChild(div);
-  });
+    // Hide spinner
+    spinner.style.display = "none";
+
+    if (!deals || deals.length === 0) {
+      container.innerHTML = "<p>No deals found for that ZIP code.</p>";
+      return;
+    }
+
+    deals.forEach(deal => {
+      const div = document.createElement("div");
+      div.className = "deal";
+      div.innerHTML = `<a href="${deal.url}" target="_blank">${deal.title}</a>`;
+      container.appendChild(div);
+    });
+  }, 1000); // You can adjust this delay to match real fetch speed
 });
 
 function getDealsByZip(zip) {
@@ -75,6 +87,12 @@ window.addEventListener("load", function () {
           document.getElementById("zipInput").value = data.postcode;
         }
       } catch (err) {
+        console.error("Geolocation error:", err);
+      }
+    });
+  }
+});
+
         console.error("Geolocation error:", err);
       }
     });
