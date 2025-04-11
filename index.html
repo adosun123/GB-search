@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GuestBites Local Deals</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .spinning-icon {
+      animation: spin 2s linear infinite;
+      width: 64px;
+      height: 64px;
+      margin: 2rem auto 1rem;
+      display: block;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -13,6 +27,9 @@
   </header>
 
   <div class="container">
+    <!-- Spinning Icon -->
+    <img src="https://cdn-icons-png.flaticon.com/512/1046/1046791.png" alt="Fork and Knife Icon" class="spinning-icon">
+
     <form id="zipForm">
       <input type="text" id="zipInput" placeholder="Enter ZIP Code" required />
       <button type="submit">Show Deals</button>
@@ -24,6 +41,14 @@
     <p>Contact us at <a href="mailto:hello@guestbites.com">hello@guestbites.com</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Prevent form from submitting and showing 404 during testing
+    document.getElementById('zipForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const zip = document.getElementById('zipInput').value;
+      alert('You entered ZIP code: ' + zip);
+    });
+  </script>
 </body>
 </html>
+
