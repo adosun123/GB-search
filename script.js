@@ -13,7 +13,7 @@ document.getElementById("zipForm").addEventListener("submit", function (e) {
   deals.forEach(deal => {
     const div = document.createElement("div");
     div.className = "deal";
-    div.innerHTML = <a href="${deal.url}" target="_blank">${deal.title}</a>;
+    div.innerHTML = `<a href="${deal.url}" target="_blank">${deal.title}</a>`;
     container.appendChild(div);
   });
 });
@@ -68,7 +68,7 @@ window.addEventListener("load", function () {
     navigator.geolocation.getCurrentPosition(async function (position) {
       const { latitude, longitude } = position.coords;
       try {
-        const res = await fetch(https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en);
+        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
         const data = await res.json();
         if (data.postcode) {
           document.getElementById("zipInput").value = data.postcode;
@@ -79,3 +79,4 @@ window.addEventListener("load", function () {
     });
   }
 });
+
